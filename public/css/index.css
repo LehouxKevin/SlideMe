@@ -8,6 +8,11 @@
 
 /* class name */
 
+.margin
+{
+    margin: 0px;
+}
+
 .input_balise 
 {
     margin-top: 2em;
@@ -21,12 +26,23 @@
     border-radius: 2px;
     margin-top: 10px;
     height:600px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .div_list_img::-webkit-scrollbar {
-    display: block;
-    }
+    -webkit-appearance: none;
+}
+
+.div_list_img::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.div_list_img::-webkit-scrollbar-thumb 
+{
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}
 
 .img_card
 {

@@ -11,6 +11,9 @@ $( document ).ready(function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    $('.badge-success').hide();
+    $('.badge-warning').hide();
 });
 
 function readURL(input) {
@@ -44,6 +47,9 @@ function saveImg(ele){
         processData: false, // NEEDED, DON'T OMIT THIS
         success : function(data){
             console.log(data);
+            showImg();
+            $('.badge-success').show();
+            $('.badge-warning').hide();
         },
         error : function(){
         }
@@ -97,6 +103,8 @@ function deleteImg(ele){
         success : function(data){
             console.log(data);
             showImg();
+            $('.badge-success').hide();
+            $('.badge-warning').show();
         },
         error : function(){
         }

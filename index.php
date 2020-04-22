@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <div class="row">
+        <div class="row margin">
             <div class="col">
                 <div id="fenetre_d_affichage">
                     <img id="affichage_image" src="#" alt="Votre image" style='width: 200px; height: 200px;'/>
@@ -41,7 +41,10 @@
 
                     <br>
                     
-                    <input type="button" value="Refresh images" class="btn btn-info" onclick="showImg()">
+                    <div>
+                        <input type="button" value="Refresh images" class="btn btn-info" onclick="showImg()">                    <span class="badge badge-success">Image saved</span>
+                        <span class="badge badge-warning">Image deleted</span>
+                    </div>
 
                     <br>
 
