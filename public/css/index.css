@@ -1,9 +1,68 @@
+/* id element */
+
 #fenetre_d_affichage
 {
     margin-top: 2em;
 }
 
+
+/* class name */
+
 .input_balise 
 {
     margin-top: 2em;
 }
+
+.div_list_img
+{
+    border: solid;
+    border-color: lightslategrey;
+    border-width: 1px;
+    border-radius: 2px;
+    margin-top: 10px;
+    height:600px;
+    overflow-y: scroll;
+}
+
+.div_list_img::-webkit-scrollbar {
+    display: block;
+    }
+
+.img_card
+{
+    width: 200px; 
+    height: 175px;
+    padding: 10px;
+}
+
+.img_card:hover 
+{
+    background-color: #05204A;
+}
+
+.background_picture
+{
+    background-color: #05204A;
+}
+
+.delete
+{
+    margin-left: 5px;
+}
+
+/* html element */
+
+ul 
+{ 
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+li 
+{
+    margin-top: 3px;
+    border-color: black;
+    border: 1px;
+}
+
