@@ -6,8 +6,9 @@
 
     <body>
         <div>
-            <label for="profile_pic">Sélectionnez le fichier à utiliser</label>
-            <input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png, .bmp, .svg">
+        <div>
+            <label for="profile_pic">select image</label>
+            <input type="file" id="fileToUpload" name="fileToUpload" accept=".jpg, .jpeg, .png, .bmp, .svg">
         </div>
 
         <br>
@@ -16,7 +17,8 @@
             <label for="name">Name :</label>
             <input type="text" id="name" name="name">
 
-            <input type="button" value="sauvegarder">
+            <input type="button" value="save" onclick="saveImg(ele)">
+        </div>
         </div>
     </body>
 </html>
