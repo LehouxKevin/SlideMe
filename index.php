@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <div class="row">
+        <div class="row margin">
             <div class="col">
             <div id="divRectangleSelection1" hidden></div>
                     <div id="divRectangleSelection2" hidden></div>
@@ -46,7 +46,10 @@
 
                     <br>
                     
-                    <input type="button" value="Refresh images" class="btn btn-info" onclick="showImg()">
+                    <div>
+                        <input type="button" value="Refresh images" class="btn btn-info" onclick="showImg()">                    <span class="badge badge-success">Image saved</span>
+                        <span class="badge badge-warning">Image deleted</span>
+                    </div>
 
                     <br>
 
