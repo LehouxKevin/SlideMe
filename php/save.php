@@ -1,8 +1,10 @@
 <?php
 
-if (isset($_FILES['fileToUpload']['name']) && ) {
+if (isset($_FILES['fileToUpload']['name']) && isset($_POST["nom"])) {
     $info = pathinfo($_FILES['fileToUpload']['name']);
     $ext = $info['extension']; // get the extension of the file
+    $nom = $_POST["nom"];
+
     $target = '../images/'.$nom.".".$ext;
 }else{
     $true = 0;
