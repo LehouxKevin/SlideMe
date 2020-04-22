@@ -1,3 +1,10 @@
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $("#fileToUpload").change(function() {
+        readURL(this);
+    });
+});
+
 function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -9,10 +16,6 @@ function readURL(input) {
       reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
   }
-  
-  $("#fileToUpload").change(function() {
-    readURL(this);
-  });
 
 
 function sauvegarderCadeau(ele){
