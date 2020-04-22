@@ -3,6 +3,7 @@
     <head>
         <title>Ken Burns</title>
 
+        <script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="public/js/index.js"></script>
     </head>
 
@@ -23,7 +24,8 @@
         </div>
         </div>
 
-        <div id="fenetre_d_affichage"></div>
+        <div id="fenetre_d_affichage"><img id="affichage_image" src="#" alt="Votre image" /></div>
+        
 
     </body>
 </html>
