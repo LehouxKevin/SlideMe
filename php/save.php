@@ -1,11 +1,19 @@
 <?php
 
-if (isset($_FILES['fileToUpload']['name']) && isset($_POST["nom"])) {
+$result = "save page";
+$true = 1;
+
+if (isset($_FILES['fileToUpload']['name'])) {
     $info = pathinfo($_FILES['fileToUpload']['name']);
     $ext = $info['extension']; // get the extension of the file
-    $nom = $_POST["nom"];
+    $name = $_POST["name"];
 
-    $target = '../images/'.$nom.".".$ext;
+    if($name != ""){
+        $target = '../images/'.$name.".".$ext;
+    }else{
+        $target = '../images/'.$_FILES['fileToUpload']['name'];
+    }
+    
 }else{
     $true = 0;
     $result = "Erreur : Image vide";
@@ -18,3 +26,5 @@ if ($true == 1) {
         $result= "Erreur : Echec telechargement de l'image";
     }
 }
+
+echo $result;
