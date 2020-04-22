@@ -23,7 +23,7 @@
                 <div id="display_bar"></div>      
             </div>
 
-            <div class="col-4 text-center">
+            <div class="col-4">
                 <div>
                     <div>
                         <label class="custom-file-label" for="profile_pic">select image</label>
@@ -32,7 +32,7 @@
 
                     <br>
 
-                    <div>
+                    <div class="text-center">
                         <label for="name">Name :</label>
                         <input type="text" id="name" name="name">
 
@@ -41,14 +41,14 @@
 
                     <br>
                     
-                    <div>
+                    <div class="text-center">
                         <input type="button" value="Refresh images" class="btn btn-info" onclick="showImg()">                    <span class="badge badge-success">Image saved</span>
                         <span class="badge badge-warning">Image deleted</span>
                     </div>
 
                     <br>
 
-                    <div id='listImg' class="div_list_img">
+                    <div id='listImg' class="div_list_img text-center">
                     </div>
 
                     <div id="divRectangleSelection1" hidden></div>
