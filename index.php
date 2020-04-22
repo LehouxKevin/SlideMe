@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>Ken Burns</title>
+
+        <script type="text/javascript" src="public/js/index.js"></script>
     </head>
 
     <body>
@@ -18,6 +20,9 @@
 
             <input type="button" value="sauvegarder">
         </div>
+
+        <div id="fenetre_d_affichage"></div>
+
     </body>
 </html>
     

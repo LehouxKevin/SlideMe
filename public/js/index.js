@@ -1,3 +1,10 @@
+function displayImage(input){
+    $filename=input.value;
+    $inImg= 'file:///'+$filename;
+
+    document.getElementById("fenetre_d_affichage").innerHTML='<img src="file://'+$filename+'" width="200px" height="auto"/>';
+  }
+
 
 function sauvegarderCadeau(ele){
     var libelle = $(ele).parent().parent().find("#libelle"+ele.id).val();
