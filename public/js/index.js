@@ -1,4 +1,4 @@
-var isOnDiv = false;
+var isOnDiv = true;
 
 $(document).ready(function () {
     console.log("ready!");
@@ -7,8 +7,8 @@ $(document).ready(function () {
     });
 
     
-    $("#fenetre_d_affichage").mouseenter(function () { isOnDiv = true; console.log(isOnDiv); });
-    $("#fenetre_d_affichage").mouseleave(function () { isOnDiv = false; console.log(isOnDiv) });
+    $("#fenetre_d_affichage").mouseenter(function () { isOnDiv = true;});
+    $("#fenetre_d_affichage").mouseleave(function () { isOnDiv = false;});
 
     setMouseListeningForRectSelector();
     showImg();
@@ -23,9 +23,9 @@ $(document).ready(function () {
     $('.badge-warning').hide();
 });
 
-function setMouseListeningForRectSelector(isMouseOnRectDisplay) {
-    console.log("Mouse Pos : "+isMouseOnRectDisplay);
-    if (isMouseOnRectDisplay) {
+function setMouseListeningForRectSelector() {
+    console.log(isOnDiv);
+    if (isOnDiv == true) {
         var div = document.getElementById('divRectangleSelection1'), x1 = 0, y1 = 0, x2 = 0, y2 = 0;
         function reCalc() { //This will restyle the div
             var x3 = Math.min(x1, x2); //Smaller X
