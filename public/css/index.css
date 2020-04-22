@@ -2,7 +2,18 @@
 
 #fenetre_d_affichage
 {
-    margin-top: 2em;
+    margin-top: 1.5em;
+    margin-left: 3em;
+    width: 820px;
+    height: 430px;
+    background-color: #05204a;
+    overflow: hidden;
+}
+
+.imgAfficher
+{
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -15,6 +26,24 @@
 
 .input_balise 
 {
+    margin-top: 1.5em;
+}
+
+#buttons_containers 
+{
+    margin-left:30%;
+}
+
+#divRectangleSelection1
+{
+    border: 1px dotted red;
+    position: absolute;
+}
+
+#divRectangleSelection2
+{
+    border: 1px dotted red;
+    position: absolute;
     margin-top: 2em;
 }
 
