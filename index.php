@@ -24,7 +24,7 @@
             <label for="name">Name :</label>
             <input type="text" id="name" name="name">
 
-            <input type="button" value="save" onclick="saveImg(ele)">
+            <input type="button" value="save" onclick="saveImg(this)">
         </div>
         </div>
 
