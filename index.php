@@ -37,9 +37,8 @@
 
                     <br>
 
-                    <div class="text-center">
-                        <label for="name">Name :</label>
-                        <input type="text" id="name" name="name">
+                    <div class="d-flex justify-content-around">
+                        <input type="text" id="name" name="name" placeholder="Name ..">
 
                         <input type="button" value="save" class="btn btn-success" onclick="saveImg(this)">
                     </div>
