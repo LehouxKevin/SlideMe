@@ -16,13 +16,13 @@
         <div class="row margin">
             <div class="col text-center">
                 <div class="border-bottom border-info p-2" >
-                    <body onload="draw();">
+                    <div id="display_container">
                         <canvas id="affichage_image" class='imgAfficher'></canvas>
-                    </body>
+                    </div>
 
                     <div id='buttons_containers'>
-                        <input class="input_balise" type="button" value="Début">
-                        <input class="input_balise" type="button" value="Fin">
+                        <input class="input_balise" type="button" value="Start">
+                        <input class="input_balise" type="button" value="End">
                     </div>
                 </div>
 
