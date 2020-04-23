@@ -27,12 +27,14 @@
                 </div>
 
                 <div id='slide' class="div_slide text-center">
-                    <ul id='ulSlide'>
+                    <ul id='ulSlide' slidename=''>
 
                     </ul>
                     <div class="float-right flex-container mt-3">
                         <div class="flex-col p-2">
                             <input type="button" value="Play" class="btn btn-info" onclick="playSlide()">
+                            <span class="badge badge-success slideSaved">Slide saved</span>
+                            <span class="badge badge-warning slideDeleted">Slide deleted</span>
                         </div>
 
                         <div class="flex-col p-2">
@@ -44,7 +46,8 @@
                         </div>
 
                         <div class="flex-col p-2">
-                            <input type="button" value="Save the slide" class="btn btn-success" onclick="saveSlide(this)">
+                            <input type="button" value="Save" class="btn btn-success" onclick="saveSlide(this)">
+                            <input type="button" value="Delete" class="btn btn-danger" onclick="deleteSlide(this)">
                         </div>
                     </div>   
                 </div>  
@@ -64,8 +67,8 @@
                     </div>
                     
                     <div class="text-center mb-3">
-                        <input type="button" value="Refresh images" class="btn btn-info" onclick="showImg()">                    <span class="badge badge-success">Image saved</span>
-                        <span class="badge badge-warning">Image deleted</span>
+                        <input type="button" value="Refresh images" class="btn btn-info" onclick="showImg()">                    <span class="badge badge-success imgSaved">Image saved</span>
+                        <span class="badge badge-warning imgDeleted">Image deleted</span>
                     </div>
 
                     <div id='listImg' class="div_list_img text-center">

@@ -37,6 +37,38 @@ if(isset($_POST["listSlide"])){
         }
     }
 
-    print_r($listImg);
+    echo $result;
+
+}elseif(isset($_POST["selectSlide"])){
+
+    $imgList = [];
+    $slideName = $_POST["nameSlide"];
+    //Get a list of file paths using the glob function.
+    $fileList = glob('../slide/'.$slideName."/*");
+ 
+    //Loop through the array that glob returned.
+    foreach($fileList as $filename){
+        //Simply print them out onto the screen.
+        array_push($imgList, $filename); 
+    }
+
+    ob_clean();
+    //print_r($imgList);
+    echo json_encode($imgList);
+}elseif(isset($_POST["deleteSlide"])){
+
+    $result = "non supprimé";
+    $slideName = $_POST["nameSlide"];
+    $slidePath = '../slide/'.$slideName;
+
+    if (file_exists($slidePath)) {
+        array_map('unlink', glob($slidePath."/*.*"));
+        rmdir($slidePath);
+        $result = "supprimer";
+    }
+
+    ob_clean();
+
     echo $result;
 }
+
