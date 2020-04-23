@@ -12,17 +12,11 @@
 
 #affichage_image
 {
-    width: 900px;
-    height: 500px;
+    width: 800px;
+    height: 450px;
     margin-top: 2em;
     margin-left: 4em;
 }
-
-#buttons_containers 
-{
-   
-}
-
 
 #ulSlide
 {
@@ -133,7 +127,8 @@
 }
     
 /* Modal Content */
-.modal-content {
+.modal-content 
+{
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -148,18 +143,21 @@
 }
 
 /* Add Animation */
-@-webkit-keyframes animatetop {
+@-webkit-keyframes animatetop 
+{
     from {top:-300px; opacity:0} 
     to {top:0; opacity:1}
 }
     
-@keyframes animatetop {
+@keyframes animatetop 
+{
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
     
 /* The Close Button */
-.close {
+.close 
+{
     color: black;
     float: right;
     font-size: 28px;
@@ -167,13 +165,15 @@
 }
 
 .close:hover,
-.close:focus {
+.close:focus 
+{
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-header {
+.modal-header 
+{
     padding: 2px 16px;
     background-color: #f8f9fa;
     color: white;
@@ -181,10 +181,36 @@
 
 .modal-body {padding: 2px 16px;}
 
-.modal-footer {
+.modal-footer 
+{
     padding: 2px 16px;
     background-color: #f8f9fa;
     color: white;
+}
+
+.deleteSlideImg:before 
+{
+    content: 'X';
+}
+
+.deleteSlideImg 
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    cursor: pointer;
+    background-color: tomato;
+}
+
+.deleteSlideImg:hover
+{
+    background-color: red;
+}
+.parent 
+{
+    position: relative;
+    display: inline-block;
 }
 
 /* html element */
