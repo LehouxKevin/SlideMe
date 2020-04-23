@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log("ready!");
     $("#fileToUpload").change(function () {
         readURL(this);
     });
@@ -20,12 +19,12 @@ $(document).ready(function () {
     $('.badge-warning').hide();
 
     // When the user clicks on <span> (x), close the modal
-    $('.close').click(function() {
+    $('.close').click(function () {
         $("#myModal").hide();
     });
-    
-        // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
         if (event.target == document.getElementById("myModal")) {
             $("#myModal").hide();
         }
@@ -69,28 +68,16 @@ function setMouseListeningForRectSelector() {
 
 function draw(path) {
     var canvas = document.getElementById('affichage_image');
-    var context = canvas.getContext('2d');
-    var cascade = new Image();
-    cascade.src = path;
-    context.drawImage(cascade,0,0);
-
-
-
-    /*var ctx = document.getElementById('affichage_image').getContext('2d');
-    var img = new Image();
-    img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-        ctx.stroke();
-    };
-    img.src = path;*/
-  }
+    $(canvas).css("background","url("+path+")");
+    $(canvas).css("background-size","cover");
+    $(canvas).css("background-size","100%");
+}
 
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            console.log(e.target.result);
             draw(e.target.result);
         }
 
@@ -138,7 +125,7 @@ function showImg() {
 
             imgList.forEach(function (img) {
                 name = img.replace(/^.*[\\\/]/, '');
-                html += "<li><input type='button' class='btn btn-primary mr-4' value='Add' onclick='addImgSlide(this)'><img id='"+name+"' src='SlideMe/"+img+"' alt='img_"+name+"' class='img_card' onclick='selectImg(this)'></img><input type='button' value='Delete' class='btn btn-danger ml-4' onclick='deleteImg(this)'></li>";
+                html += "<li><input type='button' class='btn btn-primary mr-4' value='Add' onclick='addImgSlide(this)'><img id='" + name + "' src='SlideMe/" + img + "' alt='img_" + name + "' class='img_card' onclick='selectImg(this)'></img><input type='button' value='Delete' class='btn btn-danger ml-4' onclick='deleteImg(this)'></li>";
             });
 
             html += "</ul>";
@@ -155,11 +142,11 @@ function showImg() {
 function selectImg(ele) {
     name = $(ele).attr('id');
 
-    $( "li" ).removeClass( 'background_picture' );
-    $( "img" ).removeClass( 'background_picture' );
+    $("li").removeClass('background_picture');
+    $("img").removeClass('background_picture');
     $(ele).parent().addClass('background_picture');
     $(ele).addClass('background_picture');
-    $('#affichage_image').attr('src', 'images/'+name);
+    $('#affichage_image').attr('src', 'images/' + name);
 }
 
 function deleteImg(ele) {
@@ -183,12 +170,12 @@ function deleteImg(ele) {
     });
 }
 
-function addImgSlide(ele){
+function addImgSlide(ele) {
     name = $(ele).parent().find('img').attr('id');
-    
+
     var html = "<li class='item'>";
 
-    html += "<img id='"+name+"' src='images/"+name+"' alt='slide_img_"+name+"' class='img_card' onclick='selectImg(this)'></img>";
+    html += "<img id='" + name + "' src='images/" + name + "' alt='slide_img_" + name + "' class='img_card' onclick='selectImg(this)'></img>";
 
     html += '</li>';
 
@@ -196,21 +183,21 @@ function addImgSlide(ele){
 }
 
 
-function showSlide(){
+function showSlide() {
     $.ajax({
         type: "POST",
         url: "php/slide.php",
         data: {
             listSlide: 'yes'
         },
-        success : function(data){
+        success: function (data) {
             slideList = JSON.parse(data);
             console.log(slideList);
 
             html = "<ul class='p-2'>";
 
-            slideList.forEach(function(slide){
-                html += "<li id="+slide+" class='d-flex justify-content-between'>"+slide+"<input type='button' class='btn btn-primary mr-4' value='Select' onclick='selectSlide(this)'></li>";
+            slideList.forEach(function (slide) {
+                html += "<li id=" + slide + " class='d-flex justify-content-between'>" + slide + "<input type='button' class='btn btn-primary mr-4' value='Select' onclick='selectSlide(this)'></li>";
             });
 
             html += "</ul>";
@@ -219,20 +206,20 @@ function showSlide(){
             $('#listSlide').append(html);
 
             $("#myModal").show();
-            
+
         },
-        error : function(){
+        error: function () {
         }
     });
 }
 
-function saveSlide(ele){
+function saveSlide(ele) {
 
     slideName = $('#nameSlide').val();
 
     var listImg = [];
- 
-    $('#ulSlide li').each(function() {
+
+    $('#ulSlide li').each(function () {
         listImg.push($(this).find('img').attr('id'));
     });
 
@@ -244,10 +231,10 @@ function saveSlide(ele){
             slideName: slideName,
             listImg: listImg
         },
-        success : function(data){
+        success: function (data) {
             console.log(data);
         },
-        error : function(){
+        error: function () {
         }
     });
 
