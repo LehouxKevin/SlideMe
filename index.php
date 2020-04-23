@@ -14,7 +14,7 @@
 
     <body>
         <div class="row margin">
-            <div class="col">
+            <div class="col text-center">
                 <div class="border-bottom border-info p-2" >
                     <body onload="draw();">
                         <canvas id="affichage_image" class='imgAfficher'></canvas>
@@ -26,15 +26,16 @@
                     </div>
                 </div>
 
-                <div id='slide' class="div_slide text-center">
+                <h2><span class="badge badge-secondary" id="spanSlideName"></span></h2>
+                <span class="badge badge-success slideSaved">Slide saved</span>
+                <span class="badge badge-warning slideDeleted">Slide deleted</span>
+                <div id='slide' class="div_slide">
                     <ul id='ulSlide' slidename=''>
 
                     </ul>
-                    <div class="float-right flex-container mt-3">
-                        <div class="flex-col p-2">
+                    <div class="float-right flex-container mt-1">
+                        <div class="flex-col pb-2">
                             <input type="button" value="Play" class="btn btn-info" onclick="playSlide()">
-                            <span class="badge badge-success slideSaved">Slide saved</span>
-                            <span class="badge badge-warning slideDeleted">Slide deleted</span>
                         </div>
 
                         <div class="flex-col p-2">

@@ -257,6 +257,7 @@ function saveSlide(ele){
             $('.slideDeleted').hide();
             $('#nameSlide').val('');
             $('#ulSlide').attr('slidename', slideName);
+            $('#spanSlideName').html(''+slideName);
         },
         error : function(){
         }
@@ -293,6 +294,7 @@ function selectSlide(ele){
             $('.slideSaved').hide();
             $('.slideDeleted').hide();
             $('#nameSlide').val('');
+            $('#spanSlideName').html(''+nameSlide);
         },
         error: function () {
         }
@@ -301,8 +303,7 @@ function selectSlide(ele){
 
 function deleteSlide(){
     var nameSlide = $('#ulSlide').attr('slidename');
-    alert(nameSlide);
-    
+
     $.ajax({
         type: "POST",
         url: "php/slide.php",
@@ -318,6 +319,7 @@ function deleteSlide(){
             $('.slideSaved').hide();
             $('.slideDeleted').show();
             $('#nameSlide').val('');
+            $('#spanSlideName').html('');
         },
         error: function () {
         }
