@@ -8,22 +8,21 @@
 
         <script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
         <script type="text/javascript" src="public/js/index.js"></script>
     </head>
 
     <body>
         <div class="row margin">
             <div class="col">
-            <div id="divRectangleSelection1" hidden></div>
-                    <div id="divRectangleSelection2" hidden></div>
-                    <div id="fenetre_d_affichage">
-                        <img id="affichage_image" class='imgAfficher' src="#" alt="Votre image" />
-                    </div>
+                <body onload="draw();">
+                    <canvas id="affichage_image" class='imgAfficher'></canvas>
+                </body>
 
-                    <div id='buttons_containers'>
-                        <input class="input_balise" type="button" value="Début">
-                        <input class="input_balise" type="button" value="Fin">
-                    </div>
+                <div id='buttons_containers'>
+                    <input class="input_balise" type="button" value="Début">
+                    <input class="input_balise" type="button" value="Fin">
+                </div>
 
                 <div id="display_bar"></div>      
             </div>

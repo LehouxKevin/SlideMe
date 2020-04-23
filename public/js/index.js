@@ -1,20 +1,17 @@
-var isOnDiv = true;
-
 $(document).ready(function () {
     console.log("ready!");
     $("#fileToUpload").change(function () {
         readURL(this);
     });
 
-    
-    $("#fenetre_d_affichage").mouseenter(function () { isOnDiv = true;});
-    $("#fenetre_d_affichage").mouseleave(function () { isOnDiv = false;});
 
     setMouseListeningForRectSelector();
+
+
     showImg();
 
     // name of the file appear on select
-    $(".custom-file-input").on("change", function() {
+    $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
@@ -24,44 +21,65 @@ $(document).ready(function () {
 });
 
 function setMouseListeningForRectSelector() {
-    console.log(isOnDiv);
-    if (isOnDiv == true) {
-        var div = document.getElementById('divRectangleSelection1'), x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-        function reCalc() { //This will restyle the div
-            var x3 = Math.min(x1, x2); //Smaller X
-            var x4 = Math.max(x1, x2); //Larger X
-            var y3 = Math.min(y1, y2); //Smaller Y
-            var y4 = Math.max(y1, y2); //Larger Y
-            div.style.left = x3 + 'px';
-            div.style.top = y3 + 'px';
-            div.style.width = x4 - x3 + 'px';
-            div.style.height = y4 - y3 + 'px';
-        }
-        onmousedown = function (e) {
-            div.hidden = 0; //Unhide the div
-            x1 = e.clientX; //Set the initial X
-            y1 = e.clientY; //Set the initial Y
-            reCalc();
-        };
-        onmousemove = function (e) {
-            x2 = e.clientX; //Update the current position X
-            y2 = e.clientY; //Update the current position Y
-            reCalc();
-        };
-        onmouseup = function (e) {
-            div.hidden = 1; //Hide the div
-        };
+    var stage = new createjs.Stage("affichage_image");
+    createjs.Ticker.on("tick", tick);
+
+    var selection = new createjs.Shape(),
+        g = selection.graphics.setStrokeStyle(1).beginStroke("#000").beginFill("rgba(0,0,0,0.05)"),
+        sd = g.setStrokeDash([10, 5], 0).command,
+        r = g.drawRect(0, 0, 100, 100).command,
+        moveListener;
+
+
+    stage.on("stagemousedown", dragStart);
+    stage.on("stagemouseup", dragEnd);
+
+    function dragStart(event) {
+        stage.addChild(selection).set({ x: event.stageX, y: event.stageY });
+        r.w = 0; r.h = 0;
+        moveListener = stage.on("stagemousemove", drag);
+    };
+
+    function drag(event) {
+        r.w = event.stageX - selection.x;
+        r.h = event.stageY - selection.y;
+    }
+
+    function dragEnd(event) {
+        stage.off("stagemousemove", moveListener);
+    }
+
+    function tick(event) {
+        stage.update(event);
+        sd.offset--;
     }
 }
+
+function draw(path) {
+    var canvas = document.getElementById('affichage_image');
+    var context = canvas.getContext('2d');
+    var cascade = new Image();
+    cascade.src = path;
+    context.drawImage(cascade,0,0);
+
+
+
+    /*var ctx = document.getElementById('affichage_image').getContext('2d');
+    var img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        ctx.stroke();
+    };
+    img.src = path;*/
+  }
 
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#affichage_image').attr('src', e.target.result);
-            $('#affichage_image').attr('width', '700px');
-            $('#affichage_image').attr('height', 'auto');
+            console.log(e.target.result);
+            draw(e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -82,7 +100,7 @@ function saveImg(ele) {
     $.ajax({
         type: "POST",
         url: "php/save.php",
-        data : formData,
+        data: formData,
         contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
         processData: false, // NEEDED, DON'T OMIT THIS
         success: function (data) {
@@ -96,57 +114,57 @@ function saveImg(ele) {
     });
 }
 
-function showImg(){
+function showImg() {
     $.ajax({
         type: "POST",
         url: "php/imgList.php",
-        success : function(data){
+        success: function (data) {
             imgList = JSON.parse(data);
             console.log(imgList);
 
             html = "<ul>";
 
-            imgList.forEach(function(img){
+            imgList.forEach(function (img) {
                 name = img.replace(/^.*[\\\/]/, '');
-                html += "<li><img id='"+name+"' src='SlideMe/"+img+"' alt='img_"+name+"' class='img_card' onclick='selectImg(this)'></img><input type='button' value='Delete' class='btn btn-danger delete' onclick='deleteImg(this)'></li>";
+                html += "<li><img id='" + name + "' src='SlideMe/" + img + "' alt='img_" + name + "' class='img_card' onclick='selectImg(this)'></img><input type='button' value='Delete' class='btn btn-danger delete' onclick='deleteImg(this)'></li>";
             });
 
             html += "</ul>";
 
             $('#listImg').html('');
             $('#listImg').append(html);
-            
+
         },
-        error : function(){
+        error: function () {
         }
     });
 }
 
-function selectImg(ele){
+function selectImg(ele) {
     name = $(ele).attr('id');
 
-    $( "li" ).removeClass( 'background_picture' );
+    $("li").removeClass('background_picture');
     $(ele).parent().addClass('background_picture');
-    $('#affichage_image').attr('src', 'images/'+name);
+    $('#affichage_image').attr('src', 'images/' + name);
 }
 
-function deleteImg(ele){
+function deleteImg(ele) {
     name = $(ele).parent().find('img').attr('id');
-    
+
     $.ajax({
         type: "POST",
         url: "php/delete.php",
-        data :
+        data:
         {
             name: name
         },
-        success : function(data){
+        success: function (data) {
             console.log(data);
             showImg();
             $('.badge-success').hide();
             $('.badge-warning').show();
         },
-        error : function(){
+        error: function () {
         }
     });
 }
