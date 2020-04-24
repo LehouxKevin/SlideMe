@@ -1,10 +1,22 @@
+var tabRect = [];
+var activButton = "start";
+var stage;
+
 $(document).ready(function () {
     $("#fileToUpload").change(function () {
         readURL(this);
     });
 
 
-    setMouseListeningForRectSelector();
+    //setMouseListeningForRectSelector();
+    $("#start_button").click(function() {
+        activButton = "start";
+    });
+
+    $("#end_button").click(function() {
+        activButton = "end";
+    });
+
 
 
     showImg();
@@ -33,7 +45,7 @@ $(document).ready(function () {
 });
 
 function setMouseListeningForRectSelector() {
-    var stage = new createjs.Stage("affichage_image");
+    //var stage = new createjs.Stage("affichage_image");
     createjs.Ticker.on("tick", tick);
 
     var selection = new createjs.Shape(),
@@ -42,6 +54,10 @@ function setMouseListeningForRectSelector() {
         r = g.drawRect(0, 0, 100, 100).command,
         moveListener;
 
+    var point1 = new paper.Point();
+    var point2 = new paper.Point();
+    var point3 = new paper.Point();
+    var point4 = new paper.Point();
 
     stage.on("stagemousedown", dragStart);
     stage.on("stagemouseup", dragEnd);
@@ -50,6 +66,12 @@ function setMouseListeningForRectSelector() {
         stage.addChild(selection).set({ x: event.stageX, y: event.stageY });
         r.w = 0; r.h = 0;
         moveListener = stage.on("stagemousemove", drag);
+        point1.x = event.stageX;
+        point1.y = event.stageY;
+
+        point2.y = event.stageY;
+        point4.x = event.stageX;
+
     };
 
     function drag(event) {
@@ -58,7 +80,43 @@ function setMouseListeningForRectSelector() {
     }
 
     function dragEnd(event) {
+        var indice = 0;
+        if(activButton == "end")
+        {
+            indice = 1;
+        }
+
         stage.off("stagemousemove", moveListener);
+        point3.x = event.stageX;;
+        point3.y = event.stageY;
+
+        point2.x = event.stageX;
+        point4.y = event.stageY;
+
+        console.log("Point 1 : "+point1);
+        console.log("Point 2 : "+point2);
+        console.log("Point 3 : "+point3);
+        console.log("Point 4 : "+point4);
+
+        var rectWidth = point2.x - point1.x;
+        var rectHeight = point4.y - point2.y;
+
+        if(tabRect[indice])
+        {
+            stage.removeChild(tabRect[indice]);
+        }
+
+        var rect = new createjs.Rectangle();
+        var rect = new createjs.Shape();
+                  rect.graphics.beginFill('rgba(0, 0, 0, 0.5)');
+                  rect.graphics.drawRect(point1.x, point1.y, rectWidth, rectHeight);
+                  rect.graphics.endFill();
+
+        stage.addChild(rect);
+        stage.update();
+
+        tabRect[indice] = rect;
+        
     }
 
     function tick(event) {
@@ -68,10 +126,28 @@ function setMouseListeningForRectSelector() {
 }
 
 function draw(path) {
+    if(stage)
+    {
+        resetStage();
+    }
     var canvas = document.getElementById('affichage_image');
     $(canvas).css("background","url("+path+")");
     $(canvas).css("background-size","cover");
     $(canvas).css("background-size","100%");
+    $(canvas).css("background-repeat","no-repeat");
+    $(canvas).css("background-position","center center");
+    stage = new createjs.Stage("affichage_image");
+    
+    setMouseListeningForRectSelector();
+
+}
+
+function resetStage() 
+{
+    stage.removeAllEventListeners();
+    stage.removeAllChildren();
+    stage.canvas = null;
+    stage = null;
 }
 
 function readURL(input) {

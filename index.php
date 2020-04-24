@@ -8,6 +8,7 @@
 
         <script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="assets/js/paper-full.js"></script>
         <script type="text/javascript" src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
         <script type="text/javascript" src="public/js/index.js"></script>
     </head>
@@ -17,12 +18,12 @@
             <div class="col">
                 <div class="border-bottom border-info p-2" >
                     <div id="display_container">
-                        <canvas id="affichage_image" class='imgAfficher'></canvas>
+                        <canvas id="affichage_image"></canvas>
                     </div>
 
                     <div id='buttons_containers'>
-                        <input class="input_balise" type="button" value="Start">
-                        <input class="input_balise" type="button" value="End">
+                        <input id="start_button" class="input_balise" type="button" value="Start">
+                        <input id="end_button" class="input_balise" type="button" value="End">
                     </div>
                 </div>
 

@@ -12,10 +12,9 @@
 
 #affichage_image
 {
-    width: 800px;
-    height: 450px;
-    margin-top: 2em;
-    margin-left: 4em;
+    width: 100%;
+    height: auto;
+    border: 1px black solid;
 }
 
 #ulSlide
@@ -34,13 +33,6 @@
 }
 
 /* class name */
-
-.imgAfficher
-{
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-}
 
 .margin
 {
