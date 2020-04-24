@@ -20,6 +20,7 @@ you dont need any installation for this app, use chrome for better performance
 - delete slide
 - add Ken Burns effect to images
 - play the slide
+- save animation in JSON
 
 
 ## ----------------------- technical description -----------------------

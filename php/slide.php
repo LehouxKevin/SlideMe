@@ -85,11 +85,14 @@ if(isset($_POST["listSlide"])){
 
 
     // ken burn data in json
-    $json = $_POST[''];
+    $json = $_POST['jsonData'];
 
     //write json to file
-    if (file_put_contents($slidePath+"/data.json", $json))
+    $jsonPath = $slidePath."/data.json";
+    echo $jsonPath;
+    if (file_put_contents($jsonPath, $json))
         echo $result;
+
 
 }elseif(isset($_POST["selectSlide"])){
 
