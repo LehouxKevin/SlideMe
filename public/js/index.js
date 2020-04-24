@@ -234,21 +234,31 @@ function resetStage() {
 }
 
 function kenburns_effect() {
+    resetStage();
+
+    var idProcess;
+
     var $canvas = document.getElementById('affichage_image');
     var ctx = $canvas.getContext('2d');
     var start_time = null;
-    var width = $canvas.width();
-    var height = $canvas.height();
+    var width = $canvas.width;
+    var height = $canvas.height;
 
-    var image_paths = options.images;
-    var display_time = options.display_time || 7000;
-    var fade_time = Math.min(display_time / 2, options.fade_time || 1000);
+    var image_paths = [];
+    stockageSlide.forEach(function(element)
+    {
+        image_paths.push(element["path"]);
+    });
+
+    console.log(image_paths);
+    var display_time = 7000;
+    var fade_time = Math.min(display_time / 2, 1000);
     var solid_time = display_time - (fade_time * 2);
     var fade_ratio = fade_time - display_time
-    var frames_per_second = options.frames_per_second || 30;
+    var frames_per_second = 60;
     var frame_time = (1 / frames_per_second) * 1000;
-    var zoom_level = 1 / (options.zoom || 2);
-    var clear_color = options.background_color || '#000000';
+    var zoom_level = 1 / 2;
+    var clear_color = '#000000';
 
     var images = [];
     $(image_paths).each(function (i, image_path) {
@@ -409,9 +419,9 @@ function kenburns_effect() {
 
         render_image(wrap_index(top_frame), time_passed / display_time, time_passed / fade_time);
 
-        if (options.post_render_callback) {
+        /*if (options.post_render_callback) {
             options.post_render_callback($canvas, ctx);
-        }
+        }*/
 
         // Pre-load the next image in the sequence, so it has loaded
         // by the time we get to it
@@ -423,8 +433,12 @@ function kenburns_effect() {
     get_image_info(0, function () {
         get_image_info(1, function () {
             start_time = get_time();
-            setInterval(update, frame_time);
+            idProcess = setInterval(update, frame_time);
         })
+    });
+
+    $("#stopAnimationButton").click(function () {
+        clearInterval(idProcess);
     });
 
 
@@ -732,5 +746,16 @@ function reset() {
 }
 
 function playSlide(){
+    kenburns_effect();
+}
 
+function stopSlide()
+{
+    resetStage();
+    // Clear the canvas
+    ctx.save();
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = clear_color;
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.restore();
 }

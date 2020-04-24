@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ken Burns</title>
+        <title>Slide Me Ken Burns</title>
 
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="public/css/index.css">
@@ -42,6 +42,7 @@
                         <div class="flex-col pb-2">
                             <input type="button" value="Select slide" class="btn btn-light" onclick="showSlide()">
                             <input type="button" value="Play" class="btn btn-info" onclick="playSlide()">
+                            <input type="button" value="Stop" class="btn btn-danger">
                         </div>
 
                         <div class="flex-col p-2">
