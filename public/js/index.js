@@ -181,6 +181,7 @@ function saveImg(ele) {
 
     var formData = new FormData();
     formData.append('name', name);
+    formData.append('saveImg', "yes");
     formData.append('fileToUpload', $(ele).parent().parent().find("#fileToUpload")[0].files[0]);
 
     // console.dir(name);
@@ -188,7 +189,7 @@ function saveImg(ele) {
 
     $.ajax({
         type: "POST",
-        url: "php/save.php",
+        url: "php/img.php",
         data: formData,
         contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
         processData: false, // NEEDED, DON'T OMIT THIS
@@ -206,7 +207,10 @@ function saveImg(ele) {
 function showImg() {
     $.ajax({
         type: "POST",
-        url: "php/imgList.php",
+        url: "php/img.php",
+        data: {
+            listImg: "yes"
+        },
         success: function (data) {
             imgList = JSON.parse(data);
             console.log(imgList);
@@ -246,9 +250,10 @@ function deleteImg(ele) {
 
     $.ajax({
         type: "POST",
-        url: "php/delete.php",
+        url: "php/img.php",
         data:
         {
+            nameDelete: "yes",
             name: name
         },
         success: function (data) {
@@ -273,7 +278,7 @@ function addImgSlide(ele, nm){
     var html = "<li class='item ui-state-default'>";
 
     html += '<div class="parent">';
-    html += "<img id='"+name+"' src='images/"+name+"' alt='slide_img_"+name+"' class='img_card' onclick='selectImg(this)'></img>";
+    html += "<img id='"+name+"' src='images/"+name+"' alt='slide_img_"+name+"' class='img_card unset' onclick='selectImg(this)'></img>";
 
     html += '<span class="deleteSlideImg" onclick="deleteImgSlide(this)"></span></div></li>';
 
