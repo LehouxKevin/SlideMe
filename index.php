@@ -26,6 +26,8 @@
                     <div id='buttons_containers'>
                         <input id="start_button" class="input_balise" type="button" value="Start">
                         <input id="end_button" class="input_balise" type="button" value="End">
+                        <input id='animation_duration_input' type="text" placeholder="Animation duration" value="100"/>
+                        <input id="save_animation" class="input_balise" type="button" value="Save animation">
                     </div>
                 </div>
 
