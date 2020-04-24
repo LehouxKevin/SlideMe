@@ -22,8 +22,8 @@ if(isset($_POST["listSlide"])){
 
     $slidePath = '../slide/'.$slideName;
 
-    $result = 'saveslide page :';
-
+    $result = $slideName;
+    $exist = 0;
     //check if folder exist
     if (!file_exists($slidePath)) {
         //create new folder if dont exist 
@@ -31,7 +31,9 @@ if(isset($_POST["listSlide"])){
 
     }else{
         //if name folder is slideNoName (genereted auto when user forget to add slide name)
-        if(($slidePath == "../slide/slideNoName")){          
+        if(($slidePath == "../slide/slideNoName")){     
+            
+            $exist = 1;
             //if user want to rename folder named slideNoName
             if(isset($slideNewName) && $slideNewName != ""){
                 //delete img in folder
@@ -67,13 +69,21 @@ if(isset($_POST["listSlide"])){
     }
 
     //add img in folder from list given 
+    $i = 0;
     foreach ($listImg as &$img) {
-        if(copy('../images/'.$img, $slidePath."/".$img)){
+        if($i<10){
+            $order = "0".$i;
+        }else{
+            $order = $i;
+        }
+
+        if(copy('../images/'.$img, $slidePath."/".$order."".$img)){
             $result = $slidePath;
         }
+        $i++;
     }
 
-    echo $result;
+   echo $result;
 
 }elseif(isset($_POST["selectSlide"])){
 

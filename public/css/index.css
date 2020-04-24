@@ -93,6 +93,11 @@
     padding: 10px;
 }
 
+.unset
+{
+    vertical-align: unset;
+}
+
 .img_card:hover 
 {
     background-color: #05204A;

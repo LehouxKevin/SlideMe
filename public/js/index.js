@@ -87,7 +87,7 @@ function saveAnimation() {
     //console.log(tabImage);
 
     //stockageSlide.push($('#spanSlideName').html());
-    
+
     var stockageImage = [];
     stockageImage["path"] = src;
     stockageImage["rectStartX"] = rectPointStart.x;
@@ -468,6 +468,7 @@ function saveImg(ele) {
 
     var formData = new FormData();
     formData.append('name', name);
+    formData.append('saveImg', "yes");
     formData.append('fileToUpload', $(ele).parent().parent().find("#fileToUpload")[0].files[0]);
 
     // console.dir(name);
@@ -475,7 +476,7 @@ function saveImg(ele) {
 
     $.ajax({
         type: "POST",
-        url: "php/save.php",
+        url: "php/img.php",
         data: formData,
         contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
         processData: false, // NEEDED, DON'T OMIT THIS
@@ -493,7 +494,10 @@ function saveImg(ele) {
 function showImg() {
     $.ajax({
         type: "POST",
-        url: "php/imgList.php",
+        url: "php/img.php",
+        data: {
+            listImg: "yes"
+        },
         success: function (data) {
             imgList = JSON.parse(data);
             console.log(imgList);
@@ -523,17 +527,20 @@ function selectImg(ele) {
     $("img").removeClass('background_picture');
     $(ele).parent().addClass('background_picture');
     $(ele).addClass('background_picture');
+
     draw('images/' + name);
 }
+
 
 function deleteImg(ele) {
     name = $(ele).parent().find('img').attr('id');
 
     $.ajax({
         type: "POST",
-        url: "php/delete.php",
+        url: "php/img.php",
         data:
         {
+            nameDelete: "yes",
             name: name
         },
         success: function (data) {
@@ -547,29 +554,23 @@ function deleteImg(ele) {
     });
 }
 
-function addImgSlide(ele, nm, url) {
-
-    if (nm != undefined) {
+function addImgSlide(ele, nm){
+    
+    if(nm != undefined){
         name = nm;
     } else {
         name = $(ele).parent().find('img').attr('id');
     }
 
-    if (url != undefined) {
-        path = url;
-    } else {
-        path = 'images';
-    }
     var html = "<li class='item ui-state-default'>";
 
     html += '<div class="parent">';
-    html += "<img id='" + name + "' src='" + path + "/" + name + "' alt='slide_img_" + name + "' class='img_card' onclick='selectImg(this)'></img>";
+    html += "<img id='"+name+"' src='images/"+name+"' alt='slide_img_"+name+"' class='img_card unset' onclick='selectImg(this)'></img>";
 
     html += '<span class="deleteSlideImg" onclick="deleteImgSlide(this)"></span></div></li>';
 
     $('#ulSlide').append(html);
 }
-
 
 function showSlide() {
     $.ajax({
@@ -606,25 +607,36 @@ function saveSlide(ele) {
     slideName = $('#nameSlide').val();
     slideNewName = "";
 
-    if (slideName == "") {
-        if ($('#ulSlide').attr('slidename') == "") {
+    //if input name slide is empty
+    if(slideName == ""){
+        //if no slide is selected
+        if($('#ulSlide').attr('slidename') == ""){
+            //we select defautlt slide name 
             slideName = 'slideNoName';
-        } else {
+        }else{
+            //if existing slide is selected 
             slideName = $('#ulSlide').attr('slidename');
         }
-    } else if (slideName != $('#ulSlide').attr('slidename')) {
+    }else if($('#ulSlide').attr('slidename') == "")
+    {
+        slideName = $('#nameSlide').val();
+        slideNewName = "";
+    }else if(slideName != $('#ulSlide').attr('slidename'))
+    {
         slideName = $('#ulSlide').attr('slidename');
         slideNewName = $('#nameSlide').val();
     }
 
-    // alert(slideName);
-    // alert(slideNewName);
+    alert(slideName);
+    alert(slideNewName);
+
     var listImg = [];
 
     $('#ulSlide li').each(function () {
         listImg.push($(this).find('img').attr('id'));
     });
 
+    console.dir(listImg);
     $.ajax({
         type: "POST",
         url: "php/slide.php",
@@ -671,7 +683,7 @@ function selectSlide(ele) {
             $("#myModal").hide();
             imgList.forEach(function (img) {
                 var name = img.replace(/^.*[\\\/]/, '');
-                addImgSlide("", name, "slide/" + nameSlide);
+                addImgSlide("", name.substring(2));
             });
 
             $('#ulSlide').attr('slidename', nameSlide);
@@ -717,4 +729,8 @@ function reset() {
     $('.slideDeleted').hide();
     $('#nameSlide').val('');
     $('#spanSlideName').html('');
+}
+
+function playSlide(){
+
 }
