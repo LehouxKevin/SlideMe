@@ -89,20 +89,36 @@ function saveAnimation() {
     //stockageSlide.push($('#spanSlideName').html());
 
     var stockageImage = [];
-    stockageImage["path"] = src;
-    stockageImage["rectStartX"] = rectPointStart.x;
-    stockageImage["rectStartY"] = rectPointStart.y;
+    stockageImage[0] = src;
+    stockageImage[1] = rectPointStart.x;
+    stockageImage[2] = rectPointStart.y;
     var dimension = rectDimensionStart.split("*");
-    stockageImage["rectStartWidth"] = dimension[0];
-    stockageImage["rectStartHeight"] = dimension[1];
-    stockageImage["rectEndX"] = rectPointEnd.x;
-    stockageImage["rectEndY"] = rectPointEnd.y;
+    stockageImage[3] = dimension[0];
+    stockageImage[4] = dimension[1];
+    stockageImage[5] = rectPointEnd.x;
+    stockageImage[6] = rectPointEnd.y;
     var dimension = rectDimensionEnd.split("*");
-    stockageImage["rectEndWidth"] = dimension[0];
-    stockageImage["rectEndHeight"] = dimension[1];
-    stockageImage["animationDuration"] = $("#animation_duration_input").val();
+    stockageImage[7] = dimension[0];
+    stockageImage[8] = dimension[1];
+    stockageImage[9] = $("#animation_duration_input").val();
     stockageSlide.push(stockageImage);
 
+
+    // var stockageImage = [];
+    // stockageImage["path"] = src;
+    // stockageImage["rectStartX"] = rectPointStart.x;
+    // stockageImage["rectStartY"] = rectPointStart.y;
+    // var dimension = rectDimensionStart.split("*");
+    // stockageImage["rectStartWidth"] = dimension[0];
+    // stockageImage["rectStartHeight"] = dimension[1];
+    // stockageImage["rectEndX"] = rectPointEnd.x;
+    // stockageImage["rectEndY"] = rectPointEnd.y;
+    // var dimension = rectDimensionEnd.split("*");
+    // stockageImage["rectEndWidth"] = dimension[0];
+    // stockageImage["rectEndHeight"] = dimension[1];
+    // stockageImage["animationDuration"] = $("#animation_duration_input").val();
+    // stockageSlide.push(stockageImage);
+    
     console.log(stockageSlide);   
     
 }
@@ -650,7 +666,8 @@ function saveSlide(ele) {
         listImg.push($(this).find('img').attr('id'));
     });
 
-    console.dir(listImg);
+    jsonData = JSON.stringify(stockageSlide);
+
     $.ajax({
         type: "POST",
         url: "php/slide.php",
@@ -658,7 +675,8 @@ function saveSlide(ele) {
             saveSlide: 'yes',
             slideName: slideName,
             listImg: listImg,
-            slideNewName: slideNewName
+            slideNewName: slideNewName,
+            jsonData: jsonData
         },
         success: function (data) {
             console.log(data);
@@ -669,7 +687,8 @@ function saveSlide(ele) {
             $('#ulSlide').attr('slidename', name);
             $('#spanSlideName').html('' + name);
         },
-        error: function () {
+        error: function (data) {
+            console.log(data);
         }
     });
 
