@@ -122,9 +122,9 @@ function setMouseListeningForRectSelector() {
 
         var rect = new createjs.Rectangle();
         var rect = new createjs.Shape();
-                  rect.graphics.beginFill('rgba(0, 0, 0, 0.5)');
-                  rect.graphics.drawRect(point1.x, point1.y, rectWidth, rectHeight);
-                  rect.graphics.endFill();
+        rect.graphics.beginFill('rgba(0, 0, 0, 0.5)');
+        rect.graphics.drawRect(point1.x, point1.y, rectWidth, rectHeight);
+        rect.graphics.endFill();
 
         stage.addChild(rect);
         stage.update();
@@ -236,8 +236,10 @@ function selectImg(ele) {
     $( "img" ).removeClass( 'background_picture' );
     $(ele).parent().addClass('background_picture');
     $(ele).addClass('background_picture');
+
     draw('images/' + name);
 }
+
 
 function deleteImg(ele) {
     name = $(ele).parent().find('img').attr('id');
@@ -260,7 +262,7 @@ function deleteImg(ele) {
     });
 }
 
-function addImgSlide(ele, nm, url){
+function addImgSlide(ele, nm){
     
     if(nm != undefined){
         name = nm;
@@ -268,21 +270,15 @@ function addImgSlide(ele, nm, url){
         name = $(ele).parent().find('img').attr('id');
     }
 
-    if(url != undefined){
-        path = url;
-    }else{
-        path = 'images';
-    }
     var html = "<li class='item ui-state-default'>";
 
     html += '<div class="parent">';
-    html += "<img id='"+name+"' src='"+path+"/"+name+"' alt='slide_img_"+name+"' class='img_card' onclick='selectImg(this)'></img>";
+    html += "<img id='"+name+"' src='images/"+name+"' alt='slide_img_"+name+"' class='img_card' onclick='selectImg(this)'></img>";
 
     html += '<span class="deleteSlideImg" onclick="deleteImgSlide(this)"></span></div></li>';
 
     $('#ulSlide').append(html);
 }
-
 
 function showSlide() {
     $.ajax({
@@ -319,26 +315,36 @@ function saveSlide(ele) {
     slideName = $('#nameSlide').val();
     slideNewName = "";
 
+    //if input name slide is empty
     if(slideName == ""){
+        //if no slide is selected
         if($('#ulSlide').attr('slidename') == ""){
+            //we select defautlt slide name 
             slideName = 'slideNoName';
         }else{
+            //if existing slide is selected 
             slideName = $('#ulSlide').attr('slidename');
         }
+    }else if($('#ulSlide').attr('slidename') == "")
+    {
+        slideName = $('#nameSlide').val();
+        slideNewName = "";
     }else if(slideName != $('#ulSlide').attr('slidename'))
     {
         slideName = $('#ulSlide').attr('slidename');
         slideNewName = $('#nameSlide').val();
     }
 
-    // alert(slideName);
-    // alert(slideNewName);
+    alert(slideName);
+    alert(slideNewName);
+
     var listImg = [];
 
     $('#ulSlide li').each(function () {
         listImg.push($(this).find('img').attr('id'));
     });
 
+    console.dir(listImg);
     $.ajax({
         type: "POST",
         url: "php/slide.php",
@@ -385,7 +391,7 @@ function selectSlide(ele){
             $("#myModal").hide();
             imgList.forEach(function(img){
                 var name = img.replace(/^.*[\\\/]/, '');
-                addImgSlide("", name, "slide/"+nameSlide);
+                addImgSlide("", name.substring(2));
             });
             
             $('#ulSlide').attr('slidename', nameSlide);
@@ -431,4 +437,8 @@ function reset(){
     $('.slideDeleted').hide();
     $('#nameSlide').val('');
     $('#spanSlideName').html('');
+}
+
+function playSlide(){
+
 }
