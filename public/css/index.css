@@ -24,7 +24,7 @@
     border-color: lightslategrey;
     border-width: 1px;
     border-radius: 2px;
-    margin-top: 30px;
+    margin-top: 5px;
     list-style-type:none;
     white-space:nowrap;
     overflow-x:auto;
@@ -68,7 +68,7 @@
 
 .item
 {
-    display:inline;
+    display:inline-block;
 }
 
 .div_list_img#ulSlide.div_list_slide::-webkit-scrollbar {

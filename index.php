@@ -11,11 +11,13 @@
         <script type="text/javascript" src="assets/js/paper-full.js"></script>
         <script type="text/javascript" src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
         <script type="text/javascript" src="public/js/index.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     </head>
 
     <body>
         <div class="row margin">
-            <div class="col">
+            <div class="col text-center">
                 <div class="border-bottom border-info p-2" >
                     <div id="display_container">
                         <canvas id="affichage_image"></canvas>
@@ -27,28 +29,30 @@
                     </div>
                 </div>
 
-                <div id='slide' class="div_slide text-center">
+                <h2><span class="badge badge-secondary" id="spanSlideName"></span></h2>
+                <span class="badge badge-success slideSaved">Slide saved</span>
+                <span class="badge badge-warning slideDeleted">Slide deleted</span>
+                <div id='slide' class="div_slide">
                     <ul id='ulSlide' slidename=''>
 
                     </ul>
-                    <div class="float-right flex-container mt-3">
-                        <div class="flex-col p-2">
-                            <input type="button" value="Play" class="btn btn-info" onclick="playSlide()">
-                            <span class="badge badge-success slideSaved">Slide saved</span>
-                            <span class="badge badge-warning slideDeleted">Slide deleted</span>
-                        </div>
-
-                        <div class="flex-col p-2">
+                    <div class="float-right flex-container mt-1">
+                        <div class="flex-col pb-2">
                             <input type="button" value="Select slide" class="btn btn-light" onclick="showSlide()">
+                            <input type="button" value="Play" class="btn btn-info" onclick="playSlide()">
                         </div>
 
                         <div class="flex-col p-2">
-                            <input type="text" id="nameSlide" name="name" placeholder="Slide name ..">
+                            <input type="button" value="reset" class="btn btn-warning" onclick="reset()">
+                            <input type="button" value="Delete" class="btn btn-danger" onclick="deleteSlide(this)">
+                        </div>
+
+                        <div class="flex-col p-2">
+                            <input type="text" id="nameSlide" name="name" placeholder="Slide name .." >
                         </div>
 
                         <div class="flex-col p-2">
                             <input type="button" value="Save" class="btn btn-success" onclick="saveSlide(this)">
-                            <input type="button" value="Delete" class="btn btn-danger" onclick="deleteSlide(this)">
                         </div>
                     </div>   
                 </div>  

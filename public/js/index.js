@@ -42,6 +42,20 @@ $(document).ready(function () {
         }
     }
 
+
+    $(function() {
+        $('#nameSlide').on('keypress', function(e) {
+            if (e.which == 32)
+                return false;
+        });
+    });
+
+
+    $( function() {
+        $( "#ulSlide" ).sortable();
+        $( "#ulSlide" ).disableSelection();
+    } );
+
 });
 
 function setMouseListeningForRectSelector() {
@@ -137,9 +151,8 @@ function draw(path) {
     $(canvas).css("background-repeat","no-repeat");
     $(canvas).css("background-position","center center");
     stage = new createjs.Stage("affichage_image");
-    
+    activButton = "start";
     setMouseListeningForRectSelector();
-
 }
 
 function resetStage() 
@@ -223,7 +236,7 @@ function selectImg(ele) {
     $( "img" ).removeClass( 'background_picture' );
     $(ele).parent().addClass('background_picture');
     $(ele).addClass('background_picture');
-    $('#affichage_image').attr('src', 'images/' + name);
+    draw('images/' + name);
 }
 
 function deleteImg(ele) {
@@ -247,18 +260,23 @@ function deleteImg(ele) {
     });
 }
 
-function addImgSlide(ele, nm){
+function addImgSlide(ele, nm, url){
     
     if(nm != undefined){
         name = nm;
     }else{
         name = $(ele).parent().find('img').attr('id');
     }
-    
-    var html = "<li class='item'>";
+
+    if(url != undefined){
+        path = url;
+    }else{
+        path = 'images';
+    }
+    var html = "<li class='item ui-state-default'>";
 
     html += '<div class="parent">';
-    html += "<img id='"+name+"' src='images/"+name+"' alt='slide_img_"+name+"' class='img_card' onclick='selectImg(this)'></img>";
+    html += "<img id='"+name+"' src='"+path+"/"+name+"' alt='slide_img_"+name+"' class='img_card' onclick='selectImg(this)'></img>";
 
     html += '<span class="deleteSlideImg" onclick="deleteImgSlide(this)"></span></div></li>';
 
@@ -299,7 +317,22 @@ function showSlide() {
 function saveSlide(ele) {
 
     slideName = $('#nameSlide').val();
+    slideNewName = "";
 
+    if(slideName == ""){
+        if($('#ulSlide').attr('slidename') == ""){
+            slideName = 'slideNoName';
+        }else{
+            slideName = $('#ulSlide').attr('slidename');
+        }
+    }else if(slideName != $('#ulSlide').attr('slidename'))
+    {
+        slideName = $('#ulSlide').attr('slidename');
+        slideNewName = $('#nameSlide').val();
+    }
+
+    // alert(slideName);
+    // alert(slideNewName);
     var listImg = [];
 
     $('#ulSlide li').each(function () {
@@ -312,14 +345,17 @@ function saveSlide(ele) {
         data: {
             saveSlide: 'yes',
             slideName: slideName,
-            listImg: listImg
+            listImg: listImg,
+            slideNewName: slideNewName
         },
         success: function (data) {
             console.log(data);
             $('.slideSaved').show();
             $('.slideDeleted').hide();
             $('#nameSlide').val('');
-            $('#ulSlide').attr('slidename', slideName);
+            var name = data.replace(/^.*[\\\/]/, '');
+            $('#ulSlide').attr('slidename', name);
+            $('#spanSlideName').html(''+name);
         },
         error: function () {
         }
@@ -349,13 +385,14 @@ function selectSlide(ele){
             $("#myModal").hide();
             imgList.forEach(function(img){
                 var name = img.replace(/^.*[\\\/]/, '');
-                addImgSlide("", name);
+                addImgSlide("", name, "slide/"+nameSlide);
             });
             
             $('#ulSlide').attr('slidename', nameSlide);
             $('.slideSaved').hide();
             $('.slideDeleted').hide();
             $('#nameSlide').val('');
+            $('#spanSlideName').html(''+nameSlide);
         },
         error: function () {
         }
@@ -364,8 +401,7 @@ function selectSlide(ele){
 
 function deleteSlide(){
     var nameSlide = $('#ulSlide').attr('slidename');
-    alert(nameSlide);
-    
+
     $.ajax({
         type: "POST",
         url: "php/slide.php",
@@ -381,8 +417,18 @@ function deleteSlide(){
             $('.slideSaved').hide();
             $('.slideDeleted').show();
             $('#nameSlide').val('');
+            $('#spanSlideName').html('');
         },
         error: function () {
         }
     });
+}
+
+function reset(){
+    $('#ulSlide').html('');            
+    $('#ulSlide').attr('slidename', '');
+    $('.slideSaved').hide();
+    $('.slideDeleted').hide();
+    $('#nameSlide').val('');
+    $('#spanSlideName').html('');
 }
