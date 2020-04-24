@@ -1,14 +1,14 @@
-# SlideMe
+# ** SlideMe **
 
-Practical work whose subject is software allowing the creation of photo slides with Ken Burns effect
+_Practical work whose subject is software allowing the creation of photo slides with Ken Burns effect_
 
 
------------------------ setting -----------------------
+## ----------------------- setting -----------------------
 
 you dont need any installation for this app, use chrome for better performance 
 
 
------------------------ functionality -----------------------
+## ----------------------- functionality -----------------------
 
 - you can download images and rename them
 - you can consult your saved images
@@ -22,7 +22,7 @@ you dont need any installation for this app, use chrome for better performance
 - play the slide
 
 
------------------------ technical description -----------------------
+## ----------------------- technical description -----------------------
 
 App developped with PHP and JS
 Framework used : 
@@ -30,22 +30,23 @@ Framework used :
         - Ajax
         - Bootstrap 4
         - Canvas
+        - EASELJS
 
 One page app :
-        - "index.php" (front page)
-        - "assets" contain all librairies (Jquery, Bootstrap ...)
-        - "images" contain images saved
-        - "php" contain backend pages with functions that save images and slides ....
-        - "public" contain Js and CSS
-        - "slide" contain slides saved
+        - file "index.php" (front page)
+        - folder "assets" contain all librairies (Jquery, Bootstrap ...)
+        - folder "images" contain images saved
+        - folder "php" contain backend pages with functions that save images and slides ....
+        - folder "public" contain Js and CSS
+        - folder "slide" contain slides saved
 
 No database is used for this app when you save a slide, it create a folder with the slide name and it contain slide pictures.
 
------------------------ More -----------------------
+## ----------------------- More -----------------------
 
 App not finished at 100%
 
------------------------ Developper -----------------------
+## ----------------------- Developper -----------------------
 
 LEHOUX Kévin
 AGHARBI Ayman

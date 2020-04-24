@@ -83,7 +83,13 @@ if(isset($_POST["listSlide"])){
         $i++;
     }
 
-   echo $result;
+
+    // ken burn data in json
+    $json = $_POST[''];
+
+    //write json to file
+    if (file_put_contents($slidePath+"/data.json", $json))
+        echo $result;
 
 }elseif(isset($_POST["selectSlide"])){
 
@@ -111,7 +117,7 @@ if(isset($_POST["listSlide"])){
         rmdir($slidePath);
         $result = "supprimer";
     }
-
+    
     ob_clean();
 
     echo $result;
