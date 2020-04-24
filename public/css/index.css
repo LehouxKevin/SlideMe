@@ -12,10 +12,8 @@
 
 #affichage_image
 {
-    width: 800px;
-    height: 450px;
-    margin-top: 2em;
-    margin-left: 4em;
+    width: 100%;
+    height: auto;
 }
 
 #ulSlide
@@ -76,7 +74,7 @@
 
 .item
 {
-    display:inline;
+    display:inline-block;
 }
 
 .div_list_img#ulSlide.div_list_slide::-webkit-scrollbar {

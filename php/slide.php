@@ -18,22 +18,58 @@ if(isset($_POST["listSlide"])){
 
     $listImg = $_POST['listImg'];
     $slideName = $_POST['slideName'];
+    $slideNewName = $_POST['slideNewName'];
+
     $slidePath = '../slide/'.$slideName;
 
     $result = 'saveslide page :';
 
+    //check if folder exist
     if (!file_exists($slidePath)) {
+        //create new folder if dont exist 
         mkdir($slidePath, 0777, true);
+
     }else{
-        if(rmdir($slidePath))
-            mkdir($slidePath, 0777, true);
+        //if name folder is slideNoName (genereted auto when user forget to add slide name)
+        if(($slidePath == "../slide/slideNoName")){          
+            //if user want to rename folder named slideNoName
+            if(isset($slideNewName) && $slideNewName != ""){
+                //delete img in folder
+                array_map('unlink', glob($slidePath."/*.*"));
+                //delete folder
+                if(rmdir($slidePath)){
+                    $slidePath = '../slide/'.$slideNewName;
+                    // create new folder with new name
+                    mkdir($slidePath, 0777, true);
+                }
+            }else{
+                //if user forget to name slide folder and slideNoName already exist
+                $slidePath = "../slide/slideNoName".rand();
+                mkdir($slidePath, 0777, true);
+            }
+
+        }//if folder name is not slideNoName
+        else{
+            // if user want to rename folder 
+            if(isset($slideNewName) && $slideNewName != ""){
+                array_map('unlink', glob($slidePath."/*.*"));
+                if(rmdir($slidePath)){
+                    $slidePath = '../slide/'.$slideNewName;
+                    mkdir($slidePath, 0777, true);
+                }
+            }else{
+                array_map('unlink', glob($slidePath."/*.*"));
+                if(rmdir($slidePath)){
+                    mkdir($slidePath, 0777, true);
+                } 
+            }
+        }
     }
 
+    //add img in folder from list given 
     foreach ($listImg as &$img) {
         if(copy('../images/'.$img, $slidePath."/".$img)){
-            $result.= " succes";
-        }else{
-            $result.= " error";
+            $result = $slidePath;
         }
     }
 
@@ -48,13 +84,12 @@ if(isset($_POST["listSlide"])){
  
     //Loop through the array that glob returned.
     foreach($fileList as $filename){
-        //Simply print them out onto the screen.
         array_push($imgList, $filename); 
     }
 
     ob_clean();
-    //print_r($imgList);
     echo json_encode($imgList);
+
 }elseif(isset($_POST["deleteSlide"])){
 
     $result = "non supprimé";
