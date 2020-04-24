@@ -22,6 +22,8 @@ you dont need any installation for this app, use chrome for better performance
 - play the slide
 - save animation in JSON
 
+## ----------------------- how it work -----------------------
+
 
 ## ----------------------- technical description -----------------------
 
