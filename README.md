@@ -18,7 +18,7 @@ You dont need any installation for this app, use chrome for better performance
 - save slide 
 - select saved slides
 - delete slide
-- add Ken Burns effect to images by making one start square and one end square
+- add Ken Burns effect to images by making one start square and one end square then saving the effect
 - play the slide with animations
 - save animation in JSON
 
@@ -40,7 +40,7 @@ You dont need any installation for this app, use chrome for better performance
 - Canvas
 - EASELJS
 
-One page app :
+### One page app :
 - file "index.php" (front page)
 - folder "assets" contain all librairies (Jquery, Bootstrap ...)
 - folder "images" contain images saved
@@ -52,7 +52,11 @@ No database is used for this app when you save a slide, it create a folder with 
 
 ## ----------------------- More -----------------------
 
-App not finished at 100%
+App not finished at 100%.
+
+
+You can click first on the "Start" button to do the start rectangle of the effect using a drag selection, and click on the "End" button and do the second square of the final plan but the effect won't take custom settings, it's not working. The duration isn't used too.
+Effects settings are saved into Json file but aren't read somewhere.
 
 ## ----------------------- Developper -----------------------
 
