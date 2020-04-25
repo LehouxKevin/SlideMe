@@ -1,14 +1,18 @@
 # ** SlideMe **
+-----
 
 _Practical work whose subject is software allowing the creation of photo slides with Ken Burns effect_
 
 
-## ----------------------- setting -----------------------
+## -------------------------- setting --------------------------
+-----
 
-You dont need any installation for this app, use chrome for better performance 
+You dont need any other installation than a server for this app.
+Use chrome for better performance .
 
 
 ## ----------------------- functionality -----------------------
+-----
 
 - you can download images and rename them
 - you can consult your saved images
@@ -23,7 +27,8 @@ You dont need any installation for this app, use chrome for better performance
 - save animation in JSON
 
 
-## ----------------------- technical description -----------------------
+## ------------------- technical description -------------------
+-----
 
 ### Languages :
 
@@ -50,7 +55,8 @@ You dont need any installation for this app, use chrome for better performance
 
 No database is used for this app when you save a slide, it create a folder with the slide name and it contain slide pictures.
 
-## ----------------------- More -----------------------
+## --------------------------- More ---------------------------
+-----
 
 App not finished at 100%.
 
@@ -58,7 +64,8 @@ App not finished at 100%.
 You can click first on the "Start" button to do the start rectangle of the effect using a drag selection, and click on the "End" button and do the second square of the final plan but the effect won't take custom settings, it's not working. The duration isn't used too.
 Effects settings are saved into Json file but aren't read somewhere.
 
-## ----------------------- Developper -----------------------
+## ----------------------- Developper -------------------------
+-----
 
 LEHOUX Kévin
 AGHARBI Ayman
