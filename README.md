@@ -5,7 +5,7 @@ _Practical work whose subject is software allowing the creation of photo slides 
 
 ## ----------------------- setting -----------------------
 
-you dont need any installation for this app, use chrome for better performance 
+You dont need any installation for this app, use chrome for better performance 
 
 
 ## ----------------------- functionality -----------------------
@@ -14,34 +14,39 @@ you dont need any installation for this app, use chrome for better performance
 - you can consult your saved images
 - delete image
 - add images to slide
-- change images position in slide
+- change images position in slide with drag and drop
 - save slide 
 - select saved slides
 - delete slide
-- add Ken Burns effect to images
-- play the slide
+- add Ken Burns effect to images by making one start square and one end square
+- play the slide with animations
 - save animation in JSON
-
-## ----------------------- how it work -----------------------
 
 
 ## ----------------------- technical description -----------------------
 
-App developped with PHP and JS
-Framework used : 
-        - Jquery
-        - Ajax
-        - Bootstrap 4
-        - Canvas
-        - EASELJS
+### Languages :
+
+- html
+- css
+- js
+- php
+
+### Framework :
+
+- Jquery
+- Ajax
+- Bootstrap 4
+- Canvas
+- EASELJS
 
 One page app :
-        - file "index.php" (front page)
-        - folder "assets" contain all librairies (Jquery, Bootstrap ...)
-        - folder "images" contain images saved
-        - folder "php" contain backend pages with functions that save images and slides ....
-        - folder "public" contain Js and CSS
-        - folder "slide" contain slides saved
+- file "index.php" (front page)
+- folder "assets" contain all librairies (Jquery, Bootstrap ...)
+- folder "images" contain images saved
+- folder "php" contain backend pages with functions that save images and slides ....
+- folder "public" contain Js and CSS
+- folder "slide" contain slides saved
 
 No database is used for this app when you save a slide, it create a folder with the slide name and it contain slide pictures.
 
